@@ -1,38 +1,398 @@
-.App {
-  text-align: center;
+/** Grid
+
+    grid, grid_3, grid_8, grid_12 - контейнеры. соответсвенно первый выбирает сколько колонок
+                                    в зависимости от ширины вьюпорта, а оставшиеся 
+                                    три явно говорят сколько там колонок
+
+    grid_container - будет центровать контент, чтобы контент не расползался
+
+    item_[lg|md]_0-12 - указвают ширину колонок  в зависимости от разрешения
+
+    item_skinny  - ориентируется на ширину своего контент
+    item_fluid   - занимает все оставшееся место
+    item_max     - занимает все место в строке, при этом если он без контента, то не будет паддинга
+                   так можно делать перенос строки 
+
+    grid можно вставлять напрямую в grid - он просто займет 100% 
+    и позволит вставлять колонки внутрь себя
+
+    если вложенный грид надо ограничить по ширине, то его нужно вставитьв item 
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.placeholder {
+  background-color: #ccc;
+  content: 'nbsp;';
+  font-size: .75rem;
+  padding: .25rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.placeholder_9x16 {
+  padding-bottom: calc(100% / 16 * 9);
+  background-color: #ccc;
+  content: '';
+}
+
+.placeholder_1x1 {
+  padding-bottom: 100%;
+  background-color: #ccc;
+  content: '';
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: .5rem;
+  padding: .5rem;
+}
+
+@media (max-width: 60rem) {
+
+  .showOn > .md {
+    display: none;
+  }
+
+  .showOn > .lg {
+    display: none;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@media (min-width: 60rem) and (max-width: 80rem) {
+  .showOn > .sm {
+    display: none;
+  }
+
+  .showOn > .lg {
+    display: none;
+  }
+}
+
+@media (min-width: 80rem) {
+  .showOn > .sm {
+    display: none;
+  }
+
+  .showOn > .md {
+    display: none;
+  }
+}
+
+div[class^='grid'] {
+  --grid-cols: 3;
+
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex: 0 0 100%;
+  flex-flow: wrap;
+  margin: -.5rem;
 }
 
-.App-link {
-  color: #61dafb;
+div[class^='grid'] > div[class^='grid'] {
+  margin: -.5rem 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (min-width: 60rem) {
+  div[class^='grid'] {
+    --grid-cols: 8;
+    max-width: 60rem;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (min-width: 80rem) {
+  div[class^='grid'] {
+    --grid-cols: 12;
+    max-width: 80rem;
+  }
+}
+
+.grid_3 {
+  --grid-cols: 3;
+}
+
+.grid_8 {
+  --grid-cols: 8;
+}
+
+.grid_12 {
+  --grid-cols: 3;
+}
+
+div.grid_container {
+  margin: -.5rem auto;
+  max-width: 30rem;
+}
+
+@media (min-width: 60rem) {
+  div.grid_container {
+    margin: -.5rem auto;
+    max-width: 60rem;
+  }
+}
+
+@media (min-width: 80rem) {
+  div.grid_container {
+    margin: -.5rem auto;
+    max-width: 80rem;
+  }
+}
+
+
+div[class^='item'] {
+  padding: .5rem;
+}
+
+div[class^='item']:empty {
+  padding: 0;
+}
+
+.item {
+  flex: 1 1 calc(100% / var(--grid-cols));
+}
+
+.item_max {
+  flex: 0 0 100%;
+}
+
+.item_skinny {
+  flex: 0 0 auto;
+}
+
+.item_fluid {
+  flex: auto;
+}
+
+/** item 1 */
+
+.item_1 {
+  flex: 0 0 calc(100% / var(--grid-cols) * 1);
+}
+
+@media (min-width: 60rem) and (max-width: 80rem) {
+  div.item_md_1 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 1);
+    border: 1px solid red;
+  }
+}
+
+@media (min-width: 80rem) {
+  div.item_lg_1 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 1);
+    border: 1px solid green;
+  }
+}
+
+.item_1_5 {
+  flex: 0 0 calc(100% / var(--grid-cols) * 1.5);
+}
+@media (min-width: 60rem) and (max-width: 80rem) {
+  div.item_md_1 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 1.5);
+    border: 1px solid red;
+  }
+}
+@media (min-width: 80rem) {
+  div.item_lg_1 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 1.5);
+    border: 1px solid green;
+  }
+}
+
+/** item 2 */
+
+.item_2 {
+  flex: 0 0 calc(100% / var(--grid-cols) * 2);
+}
+
+@media (min-width: 60rem) and (max-width: 80rem) {
+  div.item_md_2 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 2);
+  }
+}
+
+@media (min-width: 80rem) {
+  div.item_lg_2 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 2);
+  }
+}
+
+/** item 3 */
+
+.item_3 {
+  flex: 0 0 calc(100% / var(--grid-cols) * 3);
+}
+
+@media (min-width: 60rem) and (max-width: 80rem) {
+  div.item_md_3 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 3);
+  }
+}
+
+@media (min-width: 80rem) {
+  div.item_lg_3 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 3);
+  }
+}
+
+/** item 4 */
+
+.item_4 {
+  flex: 0 0 calc(100% / var(--grid-cols) * 4);
+}
+
+@media (min-width: 60rem) and (max-width: 80rem) {
+  div.item_md_4 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 4);
+  }
+}
+
+@media (min-width: 80rem) {
+  div.item_lg_4 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 4);
+  }
+}
+
+/** item 5 */
+
+.item_5 {
+  flex: 0 0 calc(100% / var(--grid-cols) * 5);
+}
+
+@media (min-width: 60rem) and (max-width: 80rem) {
+  div.item_md_5 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 5);
+  }
+}
+
+@media (min-width: 80rem) {
+  div.item_lg_5 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 5);
+  }
+}
+
+/** item 6 */
+
+div[class^='grid'] > div.item_6 {
+  flex: 0 0 calc(100% / var(--grid-cols) * 6);
+}
+
+@media (min-width: 60rem) and (max-width: 80rem) {
+  div[class^='grid'] > div.item_md_6 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 6);
+  }
+}
+
+@media (min-width: 80rem) {
+  div[class^='grid'] > div.item_lg_6 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 6);
+  }
+}
+
+/** item 7 */
+
+.item_7 {
+  flex: 0 0 calc(100% / var(--grid-cols) * 7);
+}
+
+@media (min-width: 60rem) and (max-width: 80rem) {
+  div.item_md_7 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 7);
+  }
+}
+
+@media (min-width: 80rem) {
+  div.item_lg_7 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 7);
+  }
+}
+
+/** item 8 */
+
+.item_8 {
+  flex: 0 0 calc(100% / var(--grid-cols) * 8);
+}
+
+@media (min-width: 60rem) and (max-width: 80rem) {
+  div.item_md_8 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 8);
+  }
+}
+
+@media (min-width: 80rem) {
+  div.item_lg_8 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 8);
+  }
+}
+
+/** item 9 */
+
+.item_9 {
+  flex: 0 0 calc(100% / var(--grid-cols) * 9);
+}
+
+@media (min-width: 60rem) and (max-width: 80rem) {
+  div.item_md_9 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 9);
+  }
+}
+
+@media (min-width: 80rem) {
+  div.item_lg_9 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 9);
+  }
+}
+
+/** item 10 */
+
+.item_10 {
+  flex: 0 0 calc(100% / var(--grid-cols) * 10);
+}
+
+@media (min-width: 60rem) and (max-width: 80rem) {
+  div.item_md_10 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 10);
+  }
+}
+
+@media (min-width: 80rem) {
+  div.item_lg_10 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 10);
+  }
+}
+
+/** item 11 */
+
+
+.item_11 {
+  flex: 0 0 calc(100% / var(--grid-cols) * 11);
+}
+
+@media (min-width: 60rem) and (max-width: 80rem) {
+  div.item_md_11 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 11);
+  }
+}
+
+@media (min-width: 80rem) {
+  div[class^='grid'] > div.item_lg_11 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 11);
+  }
+}
+
+/** item 12 */
+
+.item_12 {
+  flex: 0 0 calc(100% / var(--grid-cols) * 12);
+}
+
+@media (min-width: 60rem) and (max-width: 80rem) {
+  div.item_md_12 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 12);
+  }
+}
+
+@media (min-width: 80rem) {
+  div.item_lg_12 {
+    flex: 0 0 calc(100% / var(--grid-cols) * 12);
   }
 }
