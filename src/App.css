@@ -37,7 +37,7 @@
 }
 
 .placeholder_1x1 {
-  padding-bottom: 100%;
+  padding-bottom: 30%;
   background-color: #ccc;
   content: '';
 }
@@ -395,4 +395,10 @@ div[class^='grid'] > div.item_6 {
   div.item_lg_12 {
     flex: 0 0 calc(100% / var(--grid-cols) * 12);
   }
+}
+
+
+
+.main {
+  flex: 1 1 100%;
 }
