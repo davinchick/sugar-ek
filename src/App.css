@@ -23,6 +23,13 @@
   box-sizing: border-box;
 }
 
+body {
+  height: 100%;
+}
+.App {
+  height: 100vh;
+}
+
 .placeholder {
   background-color: #ccc;
   content: 'nbsp;';
@@ -116,6 +123,10 @@ div[class^='grid'] > div[class^='grid'] {
 
 .grid_12 {
   --grid-cols: 3;
+}
+
+.App > .grid_container {
+  height: 100%;
 }
 
 div.grid_container {
@@ -401,4 +412,15 @@ div[class^='grid'] > div.item_6 {
 
 .main {
   flex: 1 1 100%;
+}
+.flex-full {
+  flex: 1 0 auto !important;
+  width: fit-content;
+}
+
+.colored_red {
+  color: #820000;
+}
+.colored_green {
+  color: forestgreen;
 }
