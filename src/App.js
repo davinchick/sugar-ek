@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Header} from './Header'
 import {Footer} from './Footer'
-import {Home, About, Sources} from './pages'
+import {About, Sources} from './pages'
 import {
     BrowserRouter as Router,
     Switch,
@@ -89,7 +89,7 @@ function App() {
                     <Header/>
 
                     <Switch>
-                        <Route path='/home' exact component={Home}/>
+                        <Route path='/' exact/>
                         <Route path='/about' component={About}/>
                         <Route path='/sources' component={Sources}/>
                         {/* <Route path='/gallery' exact component={Gallery} />
@@ -104,7 +104,7 @@ function App() {
                             <button className="submitInputSearch">Find</button>
                         </form>
 
-                        <div className="card">
+                        <div className="boxShadow">
                             <p>There are now <em>{countOfOverlap}</em> overlaps according to search by phrase <b>'{inputSearchValue}'</b></p>
                             <p>List of Id</p>
                             <select name="selectTheId" id="" onChange={(e) => setIdFromSelect(e)}>
@@ -115,7 +115,7 @@ function App() {
                         </div>
                     </div>
 
-                    <div className="grid card">
+                    <div className="grid boxShadow">
                         <div className="item_1_5 item_md_2 item_lg_3 flex-full">
                             <h3 className={isFoundArticle ? 'colored_green' : 'colored_red'}>PMED_ID: {selectedValueId}</h3>
                             {articleText}

@@ -25,9 +25,40 @@
 
 body {
   height: 100%;
+  background-color: #f0f0f0b8;
+  font-family: 'Rubik', sans-serif;
 }
+
+a {
+  text-decoration: none;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #81cbad;
+  color: #153a2e;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: #21705e;
+}
+
+ul, li {
+  list-style: none;
+}
+
+img {
+  width: inherit;
+  height: 100%;
+  object-fit: cover;
+}
+
 .App {
   height: 100vh;
+}
+
+.App > .grid_container {
+  height: 100%;
+  background-color: #fff;
+  border-radius: 5px;
 }
 
 .placeholder {
@@ -125,9 +156,6 @@ div[class^='grid'] > div[class^='grid'] {
   --grid-cols: 3;
 }
 
-.App > .grid_container {
-  height: 100%;
-}
 
 div.grid_container {
   margin: -.5rem auto;
