@@ -11,11 +11,11 @@ export const Header = () => {
 
                                 <div className="item_max">
                                     <div className="grid">
-                                        <Link to='/' className="item navLink">home</Link>
-                                        <Link to='/sources' className="item navLink">sources</Link>
-                                        <Link to='/gallery' className="item navLink">video gallery</Link>
-                                        <Link to='/bookshelf' className="item navLink">bookshelf</Link>
-                                        <Link to='/about' className="item navLink">about project</Link>
+                                        <Link to='/' className="item navLink">Home</Link>
+                                        <Link to='/sources' className="item navLink">Sources</Link>
+                                        <Link to='/gallery' className="item navLink">Video Gallery</Link>
+                                        <Link to='/bookshelf' className="item navLink">Bookshelf</Link>
+                                        <Link to='/about' className="item navLink">About Project</Link>
                                     </div>
                                 </div>
 
