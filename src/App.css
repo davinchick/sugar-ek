@@ -28,6 +28,7 @@ body {
   background-color: #f0f0f0b8;
   font-family: 'Rubik', sans-serif;
 }
+
 ::selection {
   background: #81cbad; /* WebKit/Blink Browsers */
 }
@@ -236,7 +237,7 @@ div[class^='item']:empty {
 }
 
 .item_fluid {
-  flex: auto;
+  flex: 1 1;
 }
 
 /** item 1 */

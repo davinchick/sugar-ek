@@ -1,4 +1,22 @@
 .footer {
     flex: 0 0 auto;
-    background-color: blanchedalmond;
+    background-color: #9ea7a6e3;
+    padding: 10px;
+    color: #505050;
+}
+
+.footer p {
+    padding: 5px;
+}
+
+.footer_logo {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #f0f8ff78;
+}
+
+.footer_madeBy {
+    width: 24px;
+    margin-left: 10px;
+    border-bottom: none;
 }

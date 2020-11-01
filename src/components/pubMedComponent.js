@@ -24,7 +24,7 @@ export function PubMedComponent() {
     const searchItemsByInputValue = async () => {
         const data = await fetch(`https://cors-anywhere.herokuapp.com/${apiPub}`);
         const res = await data.json();
-        console.log(res);
+        // console.log(res);
         setCountOfOverlap(res.esearchresult.count);
         setListOfIdOverlaps(res.esearchresult.idlist);
     };
@@ -34,20 +34,24 @@ export function PubMedComponent() {
         const res = await data.json();
 
         const resultJson = res.result[selectedValueId];
-        console.log(resultJson);
+        // console.log(resultJson);
         if (resultJson) {
             const article = <div className="item_1_5 item_md_2 item_lg_3 flex-full">
-                <h4>{res.result[selectedValueId].title}</h4>
-                <p>{res.result[selectedValueId].pubdate}</p>
-                <p>Source: {res.result[selectedValueId].source}</p>
-                <p>From journal: {res.result[selectedValueId].fulljournalname}</p>
-                <p>Authors: {res.result[selectedValueId].authors.map(el => el.name).join(', ')}</p>
+                <h4 className="article_title">{res.result[selectedValueId].title}</h4>
+                <p className="article_date">{res.result[selectedValueId].pubdate}</p>
+                <p className="article_source"><span
+                    className="undescore">Source:</span> {res.result[selectedValueId].source}</p>
+                <p className="article_journal"><span
+                    className="undescore">From journal:</span> {res.result[selectedValueId].fulljournalname}</p>
+                <p className="article_authors"><span
+                    className="undescore">Authors:</span> {res.result[selectedValueId].authors.map(el => el.name).join(', ')}
+                </p>
             </div>;
-            setArticleText(article)
+            setArticleText(article);
             setIsFoundArticle(true)
         } else {
-            const message = <p>Not found any information .. or it's private article</p>
-            setArticleText(message)
+            const message = <p className="notFound">Not found any information .. or it's private article</p>
+            setArticleText(message);
             setIsFoundArticle(false)
         }
     };
@@ -56,6 +60,7 @@ export function PubMedComponent() {
         const data = await fetch(`https://cors-anywhere.herokuapp.com/${fetchMoreFromId}`);
         const res = await data.text();
         let textCitation = '';
+        // console.log(res);
         if (res) {
             const text = res.split('abstract')[1];
             if (text) {
@@ -79,20 +84,21 @@ export function PubMedComponent() {
         <div className="grid_container mt6 zIndex">
             <img className="gradient_abs gradient_abs__top" src={'/img/gradients/gradient_blue.svg'} alt="gradient"/>
             <div className="grid">
-                <div className="item_1_4 item_md_4 item_lg_4 mt3 item_skinny">
+                <div className="item_1_4 item_md_4 item_lg_4 mt3">
                     <h2>Data from <a href="https://http://www.ncbi.nlm.nih.gov" target="_blank">PubMed Central</a>
                     </h2>
 
                     <div className="boxShadow m0">
-                        <form action="" onSubmit={searchItemsByInputValue}>
+                        <form action="" className="searchForm" onSubmit={searchItemsByInputValue}>
                             <input type="text" className="searchInput" onChange={setInputSearchValue}
                                    value={inputSearchValue}/>
                             <button className="submitInputSearch">Find</button>
                         </form>
 
-                        <p>There are now <em>{countOfOverlap}</em> overlaps according to search by
+                        <p className="fz_middle">There are now <em className="undescore">{countOfOverlap}</em> overlaps
+                            according to search by
                             phrase <b>'{inputSearchValue}'</b></p>
-                        <p>List of Id</p>
+                        <p className="fz_middle searchSelect_label">List of Id</p>
                         <select name="selectTheId" id="" className="searchSelect" onChange={(e) => setIdFromSelect(e)}>
                             {listOfIdOverlaps.map(el => {
                                 return <option key={el}>{el}</option>
@@ -101,11 +107,16 @@ export function PubMedComponent() {
                     </div>
                 </div>
 
-                <div className="boxShadow item_fluid">
+                <div className="boxShadow item_fluid bg_light">
                     <div className="item_1_5 item_md_2 item_lg_3">
-                        <h3 className={isFoundArticle ? 'colored_green' : 'colored_red'}>PMED_ID: {selectedValueId}</h3>
+                        <h3 className={`searchItemTitle ${isFoundArticle ? 'colored_green' : 'colored_red'}`}>PMED_ID: {selectedValueId}</h3>
                         {articleText}
-                        <p>{articleCitation}</p>
+                        {articleCitation ?
+                            <p className="articleCitation">
+                                <span className="undescore">Abstract:</span>
+                                {articleCitation}
+                            </p>
+                        : null}
                     </div>
                 </div>
             </div>
