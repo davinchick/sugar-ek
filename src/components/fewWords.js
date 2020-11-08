@@ -3,7 +3,7 @@ import './components.css'
 
 export const FewWords = () => {
     return (
-        <div className="grid_container mt3">
+        <div className="grid_container mt6">
 
             <div className="item_1_4 item_md_4 item_lg_4">
                 <div className="card height18">

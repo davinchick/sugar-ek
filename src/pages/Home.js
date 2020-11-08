@@ -5,8 +5,8 @@ export const Home = () => {
 
     return (
         <div className="relative">
-            <FewWords/>
             <PubMedComponent />
+            <FewWords/>
         </div>
     )
 }

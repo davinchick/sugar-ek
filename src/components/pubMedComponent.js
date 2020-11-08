@@ -7,10 +7,11 @@ export function PubMedComponent() {
     const [countOfOverlap, setCountOfOverlap] = useState(0);
     const [listOfIdOverlaps, setListOfIdOverlaps] = useState([]);
 
-    const [inputSearchValue, setInputSearchValue] = useState('sugar intake');
+    const [query, setQuery] = useState('sugar intake');
+    const [inputSearchValue, setInputSearchValue] = useState('');
     const [selectedValueId, setSelectedValueId] = useState(listOfIdOverlaps[0]);
 
-    const apiPub = `http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmode=json&retmax=1000&term=${inputSearchValue.split(' ').join('+')}&field=title`;
+    const apiPub = `http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmode=json&retmax=1000&term=${query.split(' ').join('+')}&field=title`;
     const fetchMoreFromId = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=${selectedValueId}`;
     const searchArticleById = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=${selectedValueId}&retmode=json`;
     const [isFoundArticle, setIsFoundArticle] = useState(false);
@@ -18,15 +19,26 @@ export function PubMedComponent() {
     const [articleCitation, setArticleCitation] = useState('');
 
     useEffect(() => {
-        searchItemsByInputValue();
-    }, []);
+        getDataFromSearch()
+    }, [query]);
 
-    const searchItemsByInputValue = async () => {
-        const data = await fetch(`https://cors-anywhere.herokuapp.com/${apiPub}`);
-        const res = await data.json();
-        // console.log(res);
+    const getDataFromSearch = async () => {
+        const response = await fetch(`https://cors-anywhere.herokuapp.com/${apiPub}`);
+        const res = await response.json();
+        // console.log(data.hits);
         setCountOfOverlap(res.esearchresult.count);
         setListOfIdOverlaps(res.esearchresult.idlist);
+    };
+
+    const changeInputSearch = (e) => {
+        setInputSearchValue(e.target.value)
+    };
+
+    const searchItemsByInputValue = (e) => {
+        e.preventDefault();
+        setCountOfOverlap(0);
+        setQuery(inputSearchValue);
+        setInputSearchValue('');
     };
 
     const searchItemsBySelectedId = async () => {
@@ -81,7 +93,7 @@ export function PubMedComponent() {
     };
 
     return (
-        <div className="grid_container mt6 zIndex">
+        <div className="grid_container zIndex">
             <img className="gradient_abs gradient_abs__top" src={'/img/gradients/gradient_blue.svg'} alt="gradient"/>
             <div className="grid">
                 <div className="item_1_4 item_md_4 item_lg_4 mt3">
@@ -90,18 +102,19 @@ export function PubMedComponent() {
 
                     <div className="boxShadow m0">
                         <form action="" className="searchForm" onSubmit={searchItemsByInputValue}>
-                            <input type="text" className="searchInput" onChange={setInputSearchValue}
+                            <input type="text" className="searchInput" onChange={(e) => changeInputSearch(e)}
                                    value={inputSearchValue}/>
-                            <button className="submitInputSearch">Find</button>
+                            <button className="submitInputSearch" type="submit">Find</button>
                         </form>
 
                         <p className="fz_middle">There are now <em className="undescore">{countOfOverlap}</em> overlaps
                             according to search by
-                            phrase <b>'{inputSearchValue}'</b></p>
+                            phrase <b>'{query}'</b></p>
                         <p className="fz_middle searchSelect_label">List of Id</p>
                         <select name="selectTheId" id="" className="searchSelect" onChange={(e) => setIdFromSelect(e)}>
-                            {listOfIdOverlaps.map(el => {
-                                return <option key={el}>{el}</option>
+                            <option value="0">-Select id-</option>
+                            {listOfIdOverlaps.map((el, ind) => {
+                                return <option key={el} value={el}>{ind}): {el}</option>
                             })}
                         </select>
                     </div>
