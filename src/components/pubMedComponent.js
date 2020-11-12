@@ -83,42 +83,40 @@ export function PubMedComponent() {
     return (
         <div className="grid_container mt6 zIndex">
             <img className="gradient_abs gradient_abs__top" src={'/img/gradients/gradient_blue.svg'} alt="gradient"/>
-            <div className="grid">
-                <div className="item_1_4 item_md_4 item_lg_4 mt3">
-                    <h2>Data from <a href="https://http://www.ncbi.nlm.nih.gov" target="_blank">PubMed Central</a>
-                    </h2>
 
-                    <div className="boxShadow m0">
-                        <form action="" className="searchForm" onSubmit={searchItemsByInputValue}>
-                            <input type="text" className="searchInput" onChange={setInputSearchValue}
-                                   value={inputSearchValue}/>
-                            <button className="submitInputSearch">Find</button>
-                        </form>
+            <div className="item_1_4 item_md_4 item_lg_4">
+                <h2>Data from <a href="https://http://www.ncbi.nlm.nih.gov" target="_blank">PubMed Central</a>
+                </h2>
 
-                        <p className="fz_middle">There are now <em className="undescore">{countOfOverlap}</em> overlaps
-                            according to search by
-                            phrase <b>'{inputSearchValue}'</b></p>
-                        <p className="fz_middle searchSelect_label">List of Id</p>
-                        <select name="selectTheId" id="" className="searchSelect" onChange={(e) => setIdFromSelect(e)}>
-                            {listOfIdOverlaps.map(el => {
-                                return <option key={el}>{el}</option>
-                            })}
-                        </select>
-                    </div>
+                <div className="boxShadow m0">
+                    <form action="" className="searchForm" onSubmit={searchItemsByInputValue}>
+                        <input type="text" className="searchInput" onChange={setInputSearchValue}
+                               value={inputSearchValue}/>
+                        <button className="submitInputSearch">Find</button>
+                    </form>
+
+                    <p className="fz_middle">There are now <em className="undescore">{countOfOverlap}</em> overlaps
+                        according to search by
+                        phrase <b>'{inputSearchValue}'</b></p>
+                    <p className="fz_middle searchSelect_label">List of Id</p>
+                    <select name="selectTheId" id="" className="searchSelect" onChange={(e) => setIdFromSelect(e)}>
+                        <option key={'00'}>{'--select--'}</option>
+                        {listOfIdOverlaps.map((el, ind) => {
+                            return <option key={el}>{ind}) {el}</option>
+                        })}
+                    </select>
                 </div>
+            </div>
 
-                <div className="boxShadow item_fluid bg_light">
-                    <div className="item_1_5 item_md_2 item_lg_3">
-                        <h3 className={`searchItemTitle ${isFoundArticle ? 'colored_green' : 'colored_red'}`}>PMED_ID: {selectedValueId}</h3>
-                        {articleText}
-                        {articleCitation ?
-                            <p className="articleCitation">
-                                <span className="undescore">Abstract:</span>
-                                {articleCitation}
-                            </p>
-                        : null}
-                    </div>
-                </div>
+            <div className="bg_light boxShadow item_fluid">
+                <h3 className={`searchItemTitle ${isFoundArticle ? 'colored_green' : 'colored_red'}`}>PMED_ID: {selectedValueId}</h3>
+                {articleText}
+                {articleCitation ?
+                    <p className="articleCitation">
+                        <span className="undescore">Abstract:</span>
+                        {articleCitation}
+                    </p>
+                    : null}
             </div>
             <img className="gradient_abs gradient_abs__bottom" src={'/img/gradients/gradient_blue.svg'} alt="gradient"/>
         </div>

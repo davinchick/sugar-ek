@@ -1,0 +1,1 @@
+{"ast":null,"code":"export * from './fewWords';\nexport * from './pubMedComponent';","map":{"version":3,"sources":["H:/PRACTICE/sugarWebSite/sugar/src/components/index.js"],"names":[],"mappings":"AAAA,cAAc,YAAd;AACA,cAAc,mBAAd","sourcesContent":["export * from './fewWords'\r\nexport * from './pubMedComponent'"]},"metadata":{},"sourceType":"module"}
