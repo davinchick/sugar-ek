@@ -1,3 +1,7 @@
+.flex_center {
+    margin: 0 auto;
+}
+
 .bluish_card {
     border: 1px solid #81cbad6b;
     border-radius: 8px;

@@ -93,7 +93,7 @@ export function PubMedComponent() {
     };
 
     return (
-        <div className="grid_container mt6 zIndex">
+        <div className="grid_container mt6 zIndex relative">
             <img className="gradient_abs gradient_abs__top" src={'/img/gradients/gradient_blue.svg'} alt="gradient"/>
 
             <div className="item_1_4 item_md_4 item_lg_4">
@@ -103,7 +103,7 @@ export function PubMedComponent() {
                 <div className="boxShadow m0">
                     <form action="" className="searchForm" onSubmit={searchItemsByInputValue}>
                         <input type="text" className="searchInput" onChange={(e) => changeInputSearch(e)}
-                               value={inputSearchValue}/>
+                               value={inputSearchValue} placeholder={"sugar intake"}/>
                         <button className="submitInputSearch">Find</button>
                     </form>
 
