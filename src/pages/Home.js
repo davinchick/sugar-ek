@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {FewWords, PubMedComponent} from "../components";
+import React from 'react';
+import {PubMedComponent, ClinicalTrialscomponent} from "../components";
 
 export const Home = () => {
 
     return (
-        <div className="relative">
-            <FewWords/>
+        <div className="flex_center">
             <PubMedComponent />
+            <ClinicalTrialscomponent />
         </div>
     )
-}
+};
