@@ -5,7 +5,7 @@ import {
     Route,
 } from "react-router-dom";
 import {Footer, Header} from './components'
-import {About, Sources, Home, Bookshelf} from './pages'
+import {About, Sources, Home, Bookshelf, VideoGallery} from './pages'
 
 import './App.css';
 
@@ -30,8 +30,8 @@ function App() {
                         <Route path='/about' component={About}/>
                         <Route path='/sources' component={Sources}/>
                         <Route path='/bookshelf' component={Bookshelf}/>
-                        {/* <Route path='/gallery' exact component={Gallery} />
-                        <Route path='/gallery/:id' component={itemDetail} /> */}
+                        <Route path='/videoGallery' exact component={VideoGallery} />
+                        {/* <Route path='/gallery/:id' component={itemDetail} /> */}
                     </Switch>
 
                     <Footer/>
