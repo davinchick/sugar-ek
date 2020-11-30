@@ -4,24 +4,32 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
-import {Header} from './Header'
-import {Footer} from './Footer'
-import {About, Sources, Home} from './pages'
+import {Footer, Header} from './components'
+import {About, Sources, Home, Bookshelf} from './pages'
 
 import './App.css';
 
 function App() {
 
+    const [cursorAttribute, setCursorAttribute] = useState();
+
     return (
         <Router>
-            <div className="App">
+            <div className="App"
+                 // onMouseMove={(e)=> setCursorAttribute(prev => {
+                 //    return {'top': `${e.pageY - 10}px`, 'left': `${e.pageX - 10}px`}
+                 // })}
+            >
                 <div className="grid_container">
+                    {/*<div className="cursor" style={cursorAttribute}>*/}
+                    {/*</div>*/}
                     <Header/>
 
                     <Switch>
                         <Route path='/' exact component={Home}/>
                         <Route path='/about' component={About}/>
                         <Route path='/sources' component={Sources}/>
+                        <Route path='/bookshelf' component={Bookshelf}/>
                         {/* <Route path='/gallery' exact component={Gallery} />
                         <Route path='/gallery/:id' component={itemDetail} /> */}
                     </Switch>
@@ -32,4 +40,5 @@ function App() {
         </Router>
     );
 };
+
 export default App;
