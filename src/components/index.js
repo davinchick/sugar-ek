@@ -1,3 +1,5 @@
 export * from './fewWords'
 export * from './pubMedComponent'
 export * from './clinicalTrialscomponent'
+export * from './Footer'
+export * from './Header'
